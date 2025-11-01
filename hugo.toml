@@ -1,0 +1,48 @@
+baseURL = "https://pifu.me/"
+languageCode = "en"
+title = "蚍蜉蚂"
+
+[params]
+subtitle = "pifu.me"
+remark = "大🌲を揺るがしたい"
+footer = """
+[pifu.me](https://github.com/doukeshi/pifu.me)· Built with [Hugo](https://gohugo.io).  
+Source code licensed under the [MIT License](https://github.com/doukeshi/pifu.me/blob/main/LICENSE).
+Content licensed under [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/).
+"""
+
+[permalinks]
+bias = "/bias/:year/::contentbasename/"
+til = "/til/::contentbasename/"
+tags = "/til/tags/:slug/"
+labels = "/bias/tags/:slug/"
+
+[taxonomies]
+tag = "tags"
+label = "labels"
+
+[pagination]
+pagerSize = 20
+
+[markup]
+[markup.highlight]
+noClasses = false
+guessSyntax = true
+
+[menus]
+[[menu.main]]
+name = "About"
+url = "/about/"
+weight = 10
+[[menu.main]]
+name = "Projects"
+url = "/projects/"
+weight = 20
+[[menu.main]]
+name = "Bias"
+url = "/bias/"
+weight = 30
+[[menu.main]]
+name = "TIL"
+url = "/til/"
+weight = 40

@@ -1,0 +1,16 @@
+- title: notes
+  repo: https://github.com/doukeshi/notes
+  link: https://github.com/doukeshi/notes
+  content: |
+    Just some notes.
+  stacks:
+    - markdown
+    - shell
+- title: pifu.me
+  repo: https://github.com/doukeshi/pifu.me
+  link: https://pifu.me/
+  content: |
+    A personal website built with [Hugo](https://gohugo.io/) and styled with [missing.css](https://missing.style/).
+  stacks:
+    - hugo
+    - missimg.css

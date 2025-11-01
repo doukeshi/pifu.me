@@ -1,0 +1,13 @@
+{{ define "main" }}
+
+{{ $map := dict "tags" "til-list.html" "labels" "bias-list.html" }}
+{{ $partial := index $map .Data.Plural }}
+{{ if $partial }}{{ partial $partial . }}{{ else }}
+<ul>
+  {{ range .Pages }}
+  <li><a href="{{ .RelPermalink }}">{{ .Title }}</a></li>
+  {{ end }}
+</ul>
+{{ end }}
+
+{{ end }}

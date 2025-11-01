@@ -1,0 +1,40 @@
+{{ define "main" }}
+
+<article>{{ .Content }}</article>
+<style>
+  .timeline {
+    list-style: none;
+  }
+
+  .timeline li {
+    border-left: 2px solid darkgrey;
+    padding-left: 1rem;
+    position: relative;
+
+    h3 {
+      margin-block-start: 1rem
+    }
+
+    &::before {
+      content: '';
+      width: 10px;
+      height: 10px;
+      left: -6px;
+      top: 7px;
+      background: darkgrey;
+      border-radius: 50%;
+      position: absolute;
+    }
+  }
+</style>
+
+<ul class="timeline">
+  {{ range sort .Site.Data.timeline "date" "desc" }}
+  <li>
+    <time>{{ .date }}</time>
+    <h3>{{ .title }}</h3>
+    <p>{{ .remark }}</p>
+  </li>
+  {{ end }}
+</ul>
+{{ end }}

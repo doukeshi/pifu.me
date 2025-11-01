@@ -1,0 +1,11 @@
+{{ define "main" }}
+
+{{ $map := dict "til" "til-page.html" "bias" "bias-page.html" }}
+{{ $partial := index $map .Type }}
+{{ if $partial }}
+{{ partial $partial . }}
+{{ else }}
+<article>{{ .Content }}</article>
+{{ end }}
+
+{{ end }}

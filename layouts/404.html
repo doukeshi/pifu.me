@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  {{ partial "pifu.html" . }}
+  <title>Whoops! Page not found - {{ .Site.Params.subtitle }} ・ {{ .Site.Title }}</title>
+</head>
+
+<body>
+  <main>
+    <h1>Whoops! 404<br>Page not found</h1>
+    <section style="margin-block-start: 5rem;">
+      <nav>
+        <ul>
+          {{ range .Site.Menus.main }}
+          <li><a href="{{ .URL }}">{{ .Name }}</a></li>
+          {{ end }}
+        </ul>
+      </nav>
+      or
+      <p><a href="{{ .Site.Home.RelPermalink }}">Return to the home page</a></p>
+    </section>
+  </main>
+</body>

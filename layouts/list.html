@@ -1,0 +1,15 @@
+{{ define "main" }}
+
+{{ $map := dict "til" "til-list.html" "bias" "bias-list.html" }}
+{{ $partial := index $map .Section }}
+{{ if $partial }}
+{{ partial $partial . }}
+{{ else }}
+<ul>
+  {{ range .Pages }}
+  <li><a href="{{ .RelPermalink }}">{{ .Title }}</a></li>
+  {{ end }}
+</ul>
+{{ end }}
+
+{{ end }}

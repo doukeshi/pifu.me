@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="{{ with .Params.language }}{{ . }}{{ else }}{{ .Site.Language.Lang }}{{ end }}">
+
+<head>
+  {{ partial "head.html" . }}
+
+  {{ if or
+  (eq .Kind "taxonomy")
+  (eq .Type "page")
+  (and (eq .Type "labels") (eq .Kind "term"))
+  (and (eq .Type "bias") (eq .Kind "section"))
+  }}
+  <style>
+    main {
+      border-block-start: var(--border-block-start-width) var(--border-block-start-style) var(--graphical-fg);
+    }
+  </style>
+  {{ end }}
+
+  <!-- beautify ignore:start -->
+  <style>
+    :root {
+      --line-length: {{ cond ( or (eq .Type "til") (eq .Type "tags")) "45rem" (cond (eq .Type "projects") "80rem" "60rem") }};
+    }
+  </style>
+  <!-- beautify ignore:end -->
+
+</head>
+
+<body>
+  <header>
+    {{ if or (eq .Kind "taxonomy") (eq .Kind "term") }}
+    {{ partial "breadcrumbs.html" . }}
+
+    {{ if eq .Kind "term" }}
+    <h1 style="text-align: center;">#{{ .Title }}</h1>
+    {{ end }}
+    {{ if eq .Kind "taxonomy" }}
+    <h1>
+      {{ .Title }}
+      {{ with site.GetPage "section" .Section }}
+      {{ with .Params.sub }} for {{ . }}{{ end }}
+      {{ end }}
+    </h1>
+    {{ end }}
+
+    {{ else }}
+    <h1>{{ or .Title (.Date.Format "2006-01-02") }}</h1>
+    {{ end }}
+  </header>
+
+  <main>
+    {{ if ne .Kind "page" }}
+    {{ with .Content }}<div>{{ . }}</div>{{ end }}
+    {{ end }}
+
+    {{ block "main" . }}{{ end }}
+  </main>
+  <footer>{{ partial "footer.html" . }}</footer>
+</body>
+
+</html>

@@ -1,0 +1,10 @@
+<nav class="tags">
+  {{ with .Params.labels }}
+  {{ range $index, $tag := . }}
+  <chip><a href={{ "/bias/tags/" | relURL }}{{ $tag | urlize }}>#{{ $tag }}</a></chip>
+  {{ end }}
+  {{ end }}
+  <time style="margin-inline-start: auto;">{{ .Date.Format "2006-01-02" }}</time>
+</nav>
+
+<article>{{ .Content }}</article>

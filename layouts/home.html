@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  {{ partial "pifu.html" . }}
+  <title>{{ .Title }} - {{ .Site.Params.subtitle }} ・ {{ .Site.Title }}</title>
+  <style>
+    h1 {
+      font-size: 5rem;
+      margin-block: 0;
+    }
+  </style>
+</head>
+
+<body>
+  <main>
+    <h1>{{ .Site.Title }}</h1>
+    <small>{{ .Site.Params.remark }}</small>
+    {{ with .Content }}
+    <div>{{ . }}</div>
+    {{ end }}
+    <nav>
+      <ul>
+        {{ range .Site.Menus.main }}
+        <li><a href="{{ .URL }}">{{ .Name }}</a></li>
+        {{ end }}
+      </ul>
+    </nav>
+  </main>
+</body>
+
+</html>

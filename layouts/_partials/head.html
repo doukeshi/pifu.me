@@ -1,0 +1,100 @@
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>
+  {{ $map := dict "term" "#" "taxonomy" "All " }}
+  {{ $pre := index $map .Kind }}
+  {{ if $pre }}{{ $pre }}{{ end }}{{ or .Title (.Date.Format "2006-01-02") }}
+  {{ if not .IsSection }}
+  {{ with site.GetPage "section" .Section }} - {{ or .Params.sub .Title }}{{ end }}
+  {{ end }} | {{ .Site.Params.subtitle }} ・ {{ .Site.Title }}
+</title>
+
+<link rel=stylesheet href=https://unpkg.com/missing.css@1.2.0>
+{{ $css := slice
+(resources.FromString "light.css" (printf "@media (prefers-color-scheme: light) { %s }" (resources.Get "chroma-light.css").Content))
+(resources.FromString "dark.css" (printf "@media (prefers-color-scheme: dark) { %s }" (resources.Get "chroma-dark.css").Content))
+| resources.Concat "css/chroma.css"
+| resources.Minify
+| resources.Fingerprint
+}}
+<link rel="stylesheet" href="{{ $css.Permalink }}" integrity="{{ $css.Data.Integrity }}">
+<style>
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    margin-block: calc(var(--gap)/2);
+  }
+
+  time {
+    white-space: nowrap;
+    color: darkgrey;
+  }
+
+  chip {
+    white-space: nowrap;
+  }
+
+  a {
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  pre>code {
+    padding: 0.5rem;
+    display: block;
+  }
+
+  @media (max-width: 576px) {
+
+    ul,
+    ol {
+      padding-inline-start: 1rem;
+    }
+  }
+
+  body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+
+    main {
+      flex: 1 0 auto;
+
+      border-block-end: var(--border-block-end-width) var(--border-block-end-style) var(--graphical-fg);
+      padding-block-end: 2rem;
+      line-height: 1.6;
+    }
+
+    >header,
+    >footer {
+      border-block: unset;
+      margin-block: unset;
+    }
+  }
+
+  nav.tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  article.card {
+    padding: 1rem;
+    border-color: lightgrey;
+    border-radius: 0.5rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+
+    >header,
+    >footer {
+      margin-block: unset;
+      padding-block: 0.5rem;
+    }
+  }
+</style>

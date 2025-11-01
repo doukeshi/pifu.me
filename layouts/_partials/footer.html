@@ -1,0 +1,15 @@
+<nav class="tool-bar">
+  <a href="/">{{ .Site.Params.subtitle }}</a>
+  {{ range .Site.Menus.main }}
+  <a href="{{ .URL }}">{{ .Name }}</a>
+  {{ end }}
+</nav>
+<style>
+  .copyright,
+  .copyright a {
+    color: darkgray;
+  }
+</style>
+<p class="copyright">
+  ©{{ now.Format "2006" }} {{ .Site.Params.footer | markdownify }}
+</p>

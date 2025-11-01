@@ -1,0 +1,22 @@
+<article class="box card">
+  <header>
+    <nav class="tags">
+      {{ with .Params.tags }}
+      {{ range $index, $tag := . }}
+      <chip><a href={{ "/til/tags/" | relURL }}{{ $tag | urlize }}>#{{ $tag }}</a></chip>
+      {{ end }}
+      {{ end }}
+    </nav>
+  </header>
+
+  <section>
+    {{ .Content }}
+    <p style="text-align: end; margin-block: 0.5rem;">
+      <time>{{ .Date.Format "2006-01-02" }}</time>
+    </p>
+  </section>
+
+  <footer class="tool-bar" style="font-size: 1rem;">
+    <a href="{{ .RelPermalink }}">Permalink</a>
+  </footer>
+</article>

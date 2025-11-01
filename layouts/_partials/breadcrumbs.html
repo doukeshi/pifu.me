@@ -1,0 +1,26 @@
+<nav class="breadcrumbs" aria-label="breadcrumb">
+  <ol>
+    <style>
+      /* for ios breadcrumbs issue */
+      nav.breadcrumbs li {
+        display: inline;
+      }
+    </style>
+    {{ with site.GetPage "section" .Section }}
+    {{ $sec := or .Params.section .Section }}
+    {{ with site.GetPage "section" $sec }}
+    <li><a href="{{ .RelPermalink }}">{{ $sec }}</a></li>
+    {{ end }}
+    {{ end }}
+
+    {{ range .Ancestors.Reverse }}
+    {{ if and (ne .RelPermalink "/") (ne .RelPermalink "/index.html") }}
+    <li><a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a></li>
+    {{ end }}
+    {{ end }}
+
+    <li aria-current="page">
+      {{ .LinkTitle }}{{ if eq .Kind "term" }} ({{ .RegularPages.Len }}) {{ end }}
+    </li>
+  </ol>
+</nav>
